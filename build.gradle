@@ -26,8 +26,16 @@ buildscript {
         jcenter() //자신이 만든 라이브러리 업로드하기 간단
     }
     //개발에 필요한 의존성 선언
+    //여기서 h2는 인메모리 관계형 디비로 테스트, 로컬 환경 구동에서 사용
     dependencies {
         compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.projectlombok:lombok')
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+        compile('com.h2database:h2')
+        compile('org.springframework.boot:spring-boot-starter-mustache')
+        testCompile "org.projectlombok:lombok"
+        annotationProcessor('org.projectlombok:lombok')
+        testAnnotationProcessor('org.projectlombok:lombok')
         testCompile('org.springframework.boot:spring-boot-starter-test')
 
     }
