@@ -1,0 +1,45 @@
+
+  <!-- { { > } }은 현재 머스테치 파일을 기준으로 다른 파일 가져옴 -->
+  {{>layout/header}}
+  <h1>Hello Veganer</h1>
+  <div class = "col-md-12">
+    <div class = "row">
+      <div class = "col-md-6">
+        <a href="/posts/save" role="button" class = "btn btn-primary">글 등록</a>
+        {{#userName}} <!-- userName이 있다면 userName을 노출 -->
+          Logged in as : <span id = "user">{{userName}}</span>
+          <!-- spring security에서 기본적 제공하는 로그아웃 url-->
+          <a href="/logout" class = "btn btn-info actiove" role="button">Logout</a>
+        {{/userName}}
+        <!-- userName값이 존재하지 않을 경우 로그인 버튼 노출  -->
+        {{^userName}}
+          <!-- spring security에서 기본적 제공하는 로그인 URL-->
+          <a href="/oauth2/authorization/google" class="btn btn-success active" role ="button">Google Login</a>
+        {{/userName}}
+      </div>
+    </div>
+
+  <br>
+  <!-- list -->
+  <table class = "table table-horizontal table-bordered">
+    <thead class = "thead-strong">
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>최종수정일</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#posts}} <!--머스테치 문법: posts라는 List 순회 (for)-->
+      <tr>
+        <td>{{id}}</td> <!-- List에서 뽑아낸 객체의 필드 사용 -->
+        <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+        <td>{{author}}</td>
+        <td>{{modifiedDate}}</td>
+      </tr>
+    {{/posts}}
+    </tbody>
+  </table>
+  </div>
+  {{>layout/footer}}
